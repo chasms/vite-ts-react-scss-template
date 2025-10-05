@@ -1,0 +1,251 @@
+/* Layout container */
+.root {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem 6rem;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Fluid title sizing with graceful min/max */
+.title {
+  font-size: clamp(2rem, 5.5vw, 3.25rem);
+  font-weight: 500;
+  background: var(--header-gradient);
+  background-clip: text;
+  color: transparent;
+  margin: 1rem 0;
+}
+
+/* Main content panel */
+.main-section {
+  position: relative;
+  border-radius: 8px;
+  padding: clamp(1rem, 2vw + 0.5rem, 2rem);
+  margin-bottom: clamp(2rem, 4vh, 3rem);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (width <= 640px) {
+  .root {
+    padding: 0.75rem 0.75rem 5.5rem;
+  }
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
+  .main-section {
+    padding: 1rem;
+  }
+}
+
+@media (width >= 1800px) {
+  .root {
+    max-width: 1900px;
+  }
+
+  .title {
+    font-size: clamp(3rem, 3vw, 4rem);
+  }
+}
+
+/* Fae button skin (previous utility class) */
+.fae-btn {
+  position: relative;
+  background: var(--btn-bg, #5b32c9);
+  color: var(--btn-text, #fff) !important;
+  border: 1px solid var(--btn-outline, rgb(255 255 255 / 28%));
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 35%),
+    0 2px 6px -1px rgb(0 0 0 / 60%),
+    0 0 0 1px inset rgb(255 255 255 / 8%);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  transition:
+    background 140ms ease,
+    box-shadow 220ms ease,
+    transform 140ms ease;
+}
+
+.fae-btn::before,
+.fae-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fae-btn::before {
+  background: linear-gradient(
+    130deg,
+    rgb(255 255 255 / 18%),
+    transparent 40%,
+    rgb(255 255 255 / 12%) 60%,
+    transparent 85%
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+  transition: opacity 0.25s;
+}
+
+.fae-btn::after {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'><text x='4' y='18' font-size='14' fill='%23d6b657' font-family='Uncial Antiqua'>ᚠᛞᚨᚱᚲ</text><text x='60' y='34' font-size='14' fill='%23c184ff' font-family='Uncial Antiqua'>ᛒᚱᛟᚨᛁᚾ</text></svg>");
+  background-size: 140% 140%;
+  background-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+  opacity: 0.25;
+  filter: blur(0.4px);
+  transition: opacity 0.3s;
+}
+
+.fae-btn:hover {
+  background: var(--btn-bg-hover, #6f3fff);
+}
+
+.fae-btn:hover::before {
+  opacity: 0.9;
+}
+
+.fae-btn:active {
+  background: var(--btn-bg-active, #4a27a9);
+  transform: translateY(1px) scale(0.985);
+}
+
+.fae-btn:focus-visible {
+  outline: 2px solid var(--btn-text, #fff);
+  outline-offset: 2px;
+}
+
+.fae-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* THEME PALETTES */
+
+/* Classic theme overrides */
+.classic {
+  font-family:
+    "Cormorant SC", "Cinzel Decorative", "Uncial Antiqua", MedievalSharp,
+    Georgia, serif;
+
+  --accent: #d6b657;
+  --accent-glow: rgb(214 182 87 / 55%);
+  --accent-gradient: linear-gradient(
+    135deg,
+    #583c9e 0%,
+    #d6b657 28%,
+    #f2c979 55%,
+    #ffdfb0 82%,
+    #b487ff 100%
+  );
+  --header-gradient: linear-gradient(
+    95deg,
+    #ffdfb0 0%,
+    #d6b657 40%,
+    #b487ff 100%
+  );
+  --panel-bg: rgb(46 35 18 / 35%);
+  --panel-border: rgb(255 222 179 / 25%);
+  --button-primary-bg: linear-gradient(
+    130deg,
+    #b487ff 0%,
+    #d6b657 55%,
+    #ffdfb0 100%
+  );
+  --button-primary-border: rgb(255 222 179 / 50%);
+  --selection-bg: rgb(55 38 20 / 35%);
+  --btn-bg: #5d3c12;
+  --btn-bg-hover: #7a5018;
+  --btn-bg-active: #4a2c0d;
+  --btn-text: #ffefcc;
+  --btn-outline: rgb(255 239 204 / 40%);
+}
+
+.classic h1,
+.classic h2,
+.classic h3,
+.classic h4 {
+  font-family:
+    "Uncial Antiqua", "Cinzel Decorative", "Cormorant SC", MedievalSharp,
+    Georgia, serif;
+}
+
+/* Alt theme explicitly reasserts default variables to support toggling */
+.alt {
+  font-family: MedievalSharp, "Almendra Display", Georgia, serif;
+
+  --accent: #7b5df9;
+  --accent-glow: rgb(123 93 249 / 55%);
+  --accent-gradient: linear-gradient(
+    140deg,
+    #7b5df9 0%,
+    #c184ff 45%,
+    #8bd6ff 90%
+  );
+  --header-gradient: linear-gradient(
+    90deg,
+    #7b5df9 0%,
+    #c184ff 50%,
+    #8bd6ff 100%
+  );
+  --panel-bg: rgb(255 255 255 / 5%);
+  --panel-border: rgb(255 255 255 / 15%);
+  --button-primary-bg: var(--accent-gradient);
+  --button-primary-border: rgb(255 255 255 / 30%);
+  --selection-bg: rgb(0 0 0 / 15%);
+  --btn-bg: #5b32c9;
+  --btn-bg-hover: #7242f0;
+  --btn-bg-active: #462497;
+  --btn-text: #fff;
+  --btn-outline: rgb(255 255 255 / 25%);
+}
+
+.alt h1,
+.alt h2,
+.alt h3,
+.alt h4 {
+  font-family: "Almendra Display", MedievalSharp, Georgia, serif;
+}
+
+.logos-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning-logo {
+  animation: spin infinite 20s linear;
+}

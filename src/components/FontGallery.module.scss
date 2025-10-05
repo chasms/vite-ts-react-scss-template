@@ -1,0 +1,55 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgb(12 10 18 / 90%);
+  backdrop-filter: blur(14px);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (width >= 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sample-card {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 15%);
+  background: rgb(255 255 255 / 5%);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 6%),
+    0 4px 18px -6px rgb(0 0 0 / 60%);
+}
+
+.role-hint {
+  font-size: 0.7rem;
+  color: #d1d5db;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.paragraph-small {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}

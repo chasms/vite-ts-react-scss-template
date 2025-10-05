@@ -1,0 +1,169 @@
+@use "./tokens" as *;
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 70% 70%, rgb(170 80 255 / 12%), transparent 60%),
+    radial-gradient(circle at 15% 85%, rgb(139 214 255 / 10%), transparent 65%),
+    var(--noise), var(--bg);
+  color: #ebe5d7;
+  font-family: MedievalSharp, Georgia, serif;
+}
+
+.sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  background-size:
+    800px 800px,
+    600px 600px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: snow-drift 60s linear infinite;
+  opacity: 0.35;
+}
+
+/* Layer 1: tiny distant particles */
+.sparkles::before {
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgb(255 255 255 / 55%) 0 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      rgb(255 255 255 / 35%) 0 1.2px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      circle at 70% 50%,
+      rgb(255 255 255 / 50%) 0 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgb(255 255 255 / 40%) 0 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 55% 60%,
+      rgb(255 255 255 / 45%) 0 1px,
+      transparent 1px
+    );
+  filter: blur(0.5px);
+  animation-duration: 60s; /* accelerated drift */
+}
+
+/* Layer 2: closer flakes with subtle hue shimmer */
+.sparkles::after {
+  background-image:
+    radial-gradient(
+      circle at 5% 10%,
+      rgb(255 255 255 / 80%) 0 1.6px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at 25% 90%,
+      rgb(195 135 255 / 85%) 0 1.8px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 62% 40%,
+      rgb(139 214 255 / 75%) 0 1.6px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgb(255 255 255 / 90%) 0 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40% 30%,
+      rgb(255 220 160 / 55%) 0 1.4px,
+      transparent 1.4px
+    ),
+    radial-gradient(
+      circle at 75% 85%,
+      rgb(255 255 255 / 75%) 0 1.6px,
+      transparent 1.6px
+    );
+  filter: drop-shadow(0 0 4px rgb(255 255 255 / 35%));
+  animation:
+    snow-drift 40s linear infinite,
+    snow-twinkle 4.5s ease-in-out infinite alternate; /* accelerated drift + twinkle */
+
+  opacity: 0.55;
+}
+
+@keyframes snow-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(25%, 50%, 0);
+  }
+}
+
+@keyframes snow-twinkle {
+  0% {
+    filter: drop-shadow(0 0 2px rgb(255 255 255 / 25%));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 6px rgb(255 255 255 / 55%));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 3px rgb(255 255 255 / 35%));
+  }
+}
+
+/* Basic element refinements retained */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+}
+
+input[type="text"],
+input[type="color"],
+input[type="range"],
+input:not([type]) {
+  background: rgb(255 255 255 / 8%);
+  color: #ebe5d7;
+  border: 1px solid rgb(255 255 255 / 20%);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 40%),
+    0 0 0 1px inset rgb(255 255 255 / 5%);
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
+}
+
+input[type="text"]:focus,
+input[type="color"]:focus,
+input[type="range"]:focus {
+  outline: 1px solid var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 8px -1px var(--accent-glow);
+}
