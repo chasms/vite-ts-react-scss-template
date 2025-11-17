@@ -1,9 +1,10 @@
 {
-  "servers": {
-    "eSLint": {
+  "mcpServers": {
+    "eslint": {
       "type": "stdio",
       "command": "npx",
-      "args": ["@eslint/mcp@latest"]
+      "args": ["@eslint/mcp@latest"],
+      "env": {}
     },
     "stylelint": {
       "type": "stdio",
@@ -11,8 +12,9 @@
       "args": ["stylelint-mcp@latest"]
     },
     "chrome-devtools": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": ["chrome-devtools-mcp@latest", "--isolated"]
     }
   }
 }
